@@ -7,7 +7,8 @@
 
 __global__ void add(int* in, int* out) {
 	int idx = threadIdx.x;
-	out[idx] = in[idx] * in[idx];
+	int f = in[idx];
+	out[idx] = f * f;
 }
 
 
@@ -17,8 +18,8 @@ int main(int argc, char* argv[]) {
 	std::iota(std::begin(dd), std::end(dd), 1);
 
 	auto sz = 512 * sizeof(int);
-	int* din;
-	int* dout;
+	int* din = 0;
+	int* dout = 0;
 
 	cudaMalloc( (void**)&din, sz );
 	cudaMalloc( (void**)&dout, sz );
