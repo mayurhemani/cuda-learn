@@ -1,8 +1,15 @@
-all: simple1 grayscale
+NVCC=/usr/local/cuda/bin/nvcc
+CCFLAGS= -std=c++11
+
+all: simple1 grayscale threadorder
 
 
 simple1: simple1.cu
-	nvcc simple1.cu -o simple1 -std=c++11
+	$(NVCC) simple1.cu -o simple1 $(CCFLAGS) -D_MWAITXINTRIN_H_INCLUDED -D__STRICT_ANSI__ -D_FORCE_INLINES
 
-grayscale: grayscale1.cu
-	nvcc grayscale1.cu -o grayscale -lopencv_core -lopencv_imgproc -lopencv_highgui
+grayscale: grayscale.cu
+	$(NVCC) grayscale.cu -o grayscale $(CCFLAGS) -lopencv_core -lopencv_imgproc -lopencv_highgui
+
+threadorder: order.cu
+	$(NVCC) order.cu -o order $(CCFLAGS)
+
