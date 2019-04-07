@@ -1,7 +1,7 @@
 NVCC=/usr/local/cuda/bin/nvcc
 CCFLAGS= -std=c++11
 
-all: simple1 grayscale threadorder
+all: simple1 grayscale threadorder sharedarr
 
 
 simple1: simple1.cu
@@ -11,5 +11,8 @@ grayscale: grayscale.cu
 	$(NVCC) grayscale.cu -o grayscale $(CCFLAGS) -lopencv_core -lopencv_imgproc -lopencv_highgui
 
 threadorder: order.cu
-	$(NVCC) order.cu -o order $(CCFLAGS)
+	$(NVCC) order.cu -o threadorder $(CCFLAGS)
+
+sharedarr: sharedarr.cu
+	$(NVCC) sharedarr.cu -o sharedarr $(CCFLAGS)
 
